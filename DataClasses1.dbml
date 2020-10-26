@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OOPProject" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-F6CT3VTG\SQLEXPRESS;Initial Catalog=OOPProject;Integrated Security=True" SettingsObjectName="Final_Proj.Properties.Settings" SettingsPropertyName="OOPProjectConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Association Name="Customer_Purchase" Member="Purchases" ThisKey="CustID" OtherKey="CustID" Type="Purchase" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Item" Member="Items">
+    <Type Name="Item">
+      <Column Name="ItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Product" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(8,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Item_Purchase" Member="Purchases" ThisKey="ItemID" OtherKey="ItemID" Type="Purchase" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Purchases" Member="Purchases">
+    <Type Name="Purchase">
+      <Column Name="PurchaseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PurchaseDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Purchase" Member="Customer" ThisKey="CustID" OtherKey="CustID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Item_Purchase" Member="Item" ThisKey="ItemID" OtherKey="ItemID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
